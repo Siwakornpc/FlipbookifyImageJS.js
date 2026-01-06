@@ -1,0 +1,679 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@300..700&display=swap');
+
+body {
+  overflow: hidden;
+}
+
+:root {
+  --base-width: 14.85cm;
+  --base-height: 21cm;
+  --scale: calc(3.5 / 4);
+  --scale-1: 1.2;
+  --scale-2: 1.55;
+  --scale-3: 1.8;
+}
+
+/* core css */
+
+.paper {
+    display: block;
+    
+    min-width: 21cm;
+    height: 29.7cm;
+    margin: 1em;
+    padding: 1in;
+    background-color: white;
+    border: 1px solid #c6c6c6;
+    font-family: 'TH SarabunPSK', sans-serif;
+    color: black;
+    font-size: 20px;
+    box-shadow: 0px 5px 15px #00000080;
+}
+
+.paper p {
+    margin: 0px; 
+}
+
+.paper::selection {
+    background-color: #c6c6c6;
+    color: black;
+}
+
+@media only screen and (max-width: 830px) {
+    .paper {
+        margin: 0px;
+        padding: 1em;
+        min-width: 0;
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    #back {
+        margin-top: 5px !important;
+        float: none !important;
+    }
+}
+
+.ui-btn, .ui-btn-static {
+    display: flex;
+    background-color: #dbb9af00;
+    gap: 2px;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    filter: drop-shadow(0px 0px 0px #ffffff00);
+
+    color: white;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.2em;
+    
+    transition: 0.2s ease;
+}
+
+.ui-btn-static {
+    cursor: default;
+}
+
+.ui-w-num {
+    padding: 7px;
+}
+
+.ui-btn:hover {
+    background-color: #dbb9af10;
+}
+
+.ui-btn:active {
+    background-color: #dbb9af20;
+    transition: 0s ease;
+    
+    filter: drop-shadow(0px 0px 2px #ffffff80);
+}
+
+.ui-book {
+  position: relative;
+  left: calc(14.85cm / 2.28 + 5px);
+}
+
+.ui-b-c {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.volplayer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#volcontrol {
+    display: flex;
+    gap: 2px;
+}
+
+.ui-book #volcontrol {
+    flex-direction: column;
+}
+
+.ui-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #dbb9af00;
+    width: 30px;
+    
+    flex-shrink: 0;
+    border-radius: 5px;
+    
+    filter: drop-shadow(0px 0px 0px #ffffff00);
+    
+    transition: 0.2s ease;
+}
+
+.ui-slider input {
+    -webkit-appearance: none;
+    background: linear-gradient(to top, white var(--val, 50%), #ffffff40 var(--val, 50%));
+    outline: none;
+    border-radius: 5px;
+    transition: 0.2s ease;
+    margin-bottom: 5px;
+}
+
+.ui-slider input:hover {
+    background: linear-gradient(to top, white var(--val, 50%), #ffffff60 var(--val, 50%));
+    box-shadow: 0px 0px 5px #ffffff40;
+}
+
+.ui-slider input::-webkit-slider-thumb {
+    -webkit-apperance: none;
+    appearance: none;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    transform: scale(8);
+    background: #ffffff;
+    cursor: pointer;
+    margin-top: -4px; 
+}
+
+.ui-slider input::-webkit-slider-thumb:hover {
+    box-shadow: 0px 0px 5px #ffffff;
+}
+
+.ui-book .ui-btn, .ui-btn-static, .ui-slider {
+  background-color: #00000024;
+  backdrop-filter: blur(10px);
+}
+
+.ui-btn-num {
+    text-align: center;
+    font-size: 0.4em;
+    color: #ffffff80;
+    line-height: 15px;
+}
+
+.ui-book .ui-btn:hover {
+  background-color: #dbb9af10;
+  transition: 0s ease;
+}
+
+.ui-book .ui-slider input {
+    writing-mode: vertical-lr;
+    direction: rtl;
+}
+
+.ui-freestyle-text {
+  width: auto;
+  height: auto;
+  cursor: default;
+}
+
+.ui-freestyle-text .ui-btn-num {
+  color: white;
+  margin: 10px !important;
+}
+
+/*.ui-freestyle-text {*/
+/*  pointer-events: none; */
+/*}*/
+
+.ui-ft-hang {
+  position: absolute; 
+}
+
+.ui-freestyle-text:hover {
+  background-color: #00000024 !important; 
+}
+
+.ui-freestyle-text:active {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.keyboard {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-keyboard.png');
+    transition: background-image 0s, opacity 0.5s ease;
+}
+
+.vol0 {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-vol0.png');
+}
+
+.vol1 {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-vol1.png');
+}
+
+.vol2 {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-vol2.png');
+}
+
+.volno {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-volno.png');
+}
+
+.plus {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-plus.png');
+}
+
+.minus {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-minus.png');
+}
+
+.play {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-play.png');
+}
+
+.pause {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-pause.png');
+}
+
+.mag {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-mag.png');
+}
+
+.key-help {
+    background-image: url('https://siwakornpc.neocities.org/images/icon-key.png');
+}
+
+.ui-btn-disabled, .ui-book .ui-btn-disabled {
+    background-color: transparent;
+    pointer-events: none;
+    backdrop-filter: blur(0px);
+    text-shadow: 0 0 5px #000;
+    opacity: 0.5;
+}
+
+.ui-e-indi {
+    display: flex;
+    justify-content: center;
+    background-color: #00000024;
+    width: max-content;
+    margin: auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    backdrop-filter: blur(10px);
+    color: white;
+    text-shadow: 0 0 5px #00000080;
+}
+
+#indi {
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    pointer-events: none;
+    user-select: none;
+    transition: 0.2s ease;
+    z-index: 240008;
+}
+
+/* additional css */
+
+.book {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  margin: 40px auto;
+  width: calc(var(--base-width) * var(--scale));
+  height: calc(var(--base-height) * var(--scale));
+  perspective: 2000px;
+  transition: transform 0.5s ease;
+}
+
+.e-book {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  perspective: 2000px;
+  will-change: transform;
+  transition: transform 0.1s ease;
+}
+
+.book.l-center {
+  transform: translateX(50%);
+}
+
+.book.r-center {
+  transform: translateX(100%);
+}
+
+.ui-book {
+  transition: transform 0.5s ease;
+}
+
+.ui-book.r-center {
+  transform: translateX(calc(-1 * var(--base-width) * var(--scale)));
+}
+
+.page {
+  position: absolute;
+  width: calc(var(--base-width) * var(--scale));
+  height: calc(var(--base-height) * var(--scale));
+  background-color: #c0c0c0;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 0.5s ease;
+}
+
+.pageWebtoon {
+  position: relative;
+  width: calc(var(--base-width) * var(--scale));
+  height: calc(var(--base-height) * var(--scale));
+  background-color: #c0c0c0;
+}
+
+.webtoon {
+  display: none;
+  position: relative;
+  box-shadow: 0px 0px 20px 10px white, 0px 0px 10px 10px white;
+}
+
+.webtoonTwo {
+  display: flex;
+  flex-direction: column;
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+img {
+  border-radius: 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page img:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+.page:hover {
+  box-shadow: 0px 0px 15px #fffc;
+}
+
+.p-left {
+  object-position: left center;
+}
+
+.p-right {
+  object-position: right center;
+}
+
+.page.flipped {
+  transform: rotateY(-180deg);
+}
+
+/* ui book */
+
+#volcontrol, #zoomcontrol, #helpbox {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+#volcontrol.visible {
+  max-height: 400px;
+  transform: translate(0);
+}
+
+#zoomcontrol.visible {
+  max-height: 150px;
+  transform: translate(0);
+}
+
+.not-used {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.not-used > .ui-btn,
+.not-used .ui-btn-static {
+  opacity: 0.5;
+}
+
+
+@media only screen and 
+  (max-width: 1070px) and (min-height: 860px),
+  (max-width: 900px) and (min-height: 750px),
+  (max-width: 700px) /* and (min-height: 620px) */ {
+  
+  body {
+    overflow: auto;
+  }
+
+  .book {
+    height: auto;
+    width: auto;
+    transform: none !important;
+  }
+
+  .e-book {
+    display: none;
+  }
+
+  .page {
+    display: none;
+  }
+
+  .webtoon {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .book.l-center,
+  .book.r-center {
+    transform: translateX(0%);
+  }
+
+  .ui-book {
+    position: sticky;
+    top: calc(20px + 85px);
+    margin-left: 10px;
+    z-index: 2400000;
+  }
+
+  .ui-book.r-center {
+    transform: translateX(0%) !important;
+  }
+
+  #indi {
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 590px) {
+  .pageWebtoon {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-1));
+    height: calc(var(--base-height) * var(--scale) / var(--scale-1));
+  }
+  
+  .webtoon {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-1));
+  }
+
+  .ui-book {
+    left: calc(var(--base-width) / 2.28 / var(--scale-1) + 5px);
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .pageWebtoon {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-2));
+    height: calc(var(--base-height) * var(--scale) / var(--scale-2));
+  }
+  
+  .webtoon {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-2));
+  }
+
+  .ui-book {
+    left: calc(var(--base-width) / 2.28 / var(--scale-2) + 10px);
+  }
+}
+
+@media only screen and (max-height: 860px) {
+  .book {
+    height: calc(var(--base-height) * var(--scale) / var(--scale-1));
+  }
+
+  .page {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-1));
+    height: calc(var(--base-height) * var(--scale) / var(--scale-1));
+  }
+
+  .book.l-center {
+    transform: translateX(calc(50% / var(--scale-1)));
+  }
+
+  .book.r-center {
+    transform: translateX(calc(100% / var(--scale-1)));
+  }
+
+  .ui-book {
+    left: calc(var(--base-width) / 2.28 / var(--scale-1) + 5px);
+  }
+
+  .ui-book.r-center {
+    transform: translateX(calc(-1 * var(--base-width) * var(--scale) / var(--scale-1)));
+  }
+}
+
+@media only screen and (max-height: 750px) {
+  .book {
+    height: calc(var(--base-height) * var(--scale) / var(--scale-2));
+  }
+
+  .page {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-2));
+    height: calc(var(--base-height) * var(--scale) / var(--scale-2));
+  }
+
+  .book.l-center {
+    transform: translateX(calc(50% / var(--scale-2)));
+  }
+
+  .book.r-center {
+    transform: translateX(calc(100% / var(--scale-2)));
+  }
+
+  .ui-book {
+    left: calc(var(--base-width) / 2.28 / var(--scale-2) + 5px);
+  }
+
+  .ui-book.r-center {
+    transform: translateX(calc(-1 * var(--base-width) * var(--scale) / var(--scale-2)));
+  }
+}
+
+/*@media only screen and (max-height: 620px) {*/
+/*  .book {*/
+/*    height: calc(var(--base-height) * var(--scale) / var(--scale-3));*/
+/*  }*/
+
+/*  .page {*/
+/*    width: calc(var(--base-width) * var(--scale) / var(--scale-3));*/
+/*    height: calc(var(--base-height) * var(--scale) / var(--scale-3));*/
+/*  }*/
+
+/*  .book.l-center {*/
+/*    transform: translateX(calc(50% / var(--scale-3)));*/
+/*  }*/
+
+/*  .book.r-center {*/
+/*    transform: translateX(calc(100% / var(--scale-3)));*/
+/*  }*/
+
+/*  .ui-book {*/
+/*    left: calc(var(--base-width) / 2 / var(--scale-3) + 10px);*/
+/*  }*/
+/*}*/
+
+@media only screen and (max-width: 1070px) and (max-height: 860px) {
+  .book {
+    height: auto;
+  }
+  
+  .pageWebtoon {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-1));
+    height: calc(var(--base-height) * var(--scale) / var(--scale-1));
+  }
+  
+  .webtoon {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-1));
+  }
+}
+
+@media only screen and (max-width: 900px) and (max-height: 750px) {
+  .pageWebtoon {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-2));
+    height: calc(var(--base-height) * var(--scale) / var(--scale-2));
+  }
+  
+  .webtoon {
+    width: calc(var(--base-width) * var(--scale) / var(--scale-2));
+  }
+}
+
+/*@media only screen and (max-width: 700px) and (max-height: 620px) {*/
+/*  .pageWebtoon {*/
+/*    width: calc(var(--base-width) * var(--scale) / var(--scale-3));*/
+/*    height: calc(var(--base-height) * var(--scale) / var(--scale-3));*/
+/*  }*/
+/*}*/
+
+.pressed {
+  background-color: #dbb9af20 !important;
+  filter: drop-shadow(0px 0px 2px #ffffff80);
+}
+  
+.zoomed {
+  transform: scale(1.5);
+}
+
+.e-book.zoomed.l-center {
+  transform: scale(1.5) translateX(8.6vh);
+}
+
+.e-book.zoomed.r-center {
+  transform: scale(1.5) translateX(17.2vh);
+}
+
+.notoify {
+  font-family: "Noto Emoji", sans-serif;
+  font-size: 0.9em;
+  font-weight: 700;
+  text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff;
+  line-height: 30px;
+}
+  
+#indi {
+  opacity: 0;
+  transform: translate(0);
+}
+
+#indi.visible {
+  opacity: 1;
+  transition: 0s ease;
+}
+  
+.key-label {
+  display: inline-block;
+  background-color: #00000020;
+  font-size: 0.8em;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid #ffffff80;
+  text-align: center;
+  margin: 2px;
+  line-height: 18px;
+  box-shadow: 0 0 5px #00000080;
+}
+  
+#helpbox.visible {
+  max-height: 200px;
+  transform: translate(0);
+}
