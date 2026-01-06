@@ -1,17 +1,10 @@
-/*!
+/*
 * FlipbookifyImageJS
 * https://siwakornpc.neocities.org/modules/flipbookify-image-js
-*
 * 
-*
-*
-*
-*
-*
-*
-*
-*
-*
+* Copyright Siwakorn P. and only me
+* 
+* 6/Jan/2026
 */
 
 export function flipbookify(obj) {
@@ -1296,4 +1289,5 @@ export function flipbookify(obj) {
         plsHelpBoxAlign.style.justifyContent = ""; 
     }
     });
+
 }
