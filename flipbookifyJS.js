@@ -7,7 +7,7 @@
 * 6/Jan/2026
 */
 
-function flipbookify(obj) {
+export function flipbookify(obj) {
 	if (!obj.pageImages) {
 		throw new Error("FlipbookifyImageJS: Object pageImages is null.\n\tCannot generate the flipbook without any pages.")
 	}
@@ -1291,4 +1291,5 @@ function flipbookify(obj) {
     });
 
 }
+
 
