@@ -21,7 +21,7 @@ Write the base element for creating the flipbook:
 ```
 Then add the JS structure like below:
 
-```js
+```html
 <script type="module">
     import { flipbookify } from "https://raw.githubusercontent.com/Siwakornpc/FlipbookifyImageJS.js/refs/heads/main/flipbookifyJS.js";
     flipbookify({
