@@ -1,4 +1,9 @@
-# FlipbookifyImageJS.js
+# FlipbookifyImageJS.js 1.1.0
+
+### Logs
+- Made the code for adding `audio` object names.
+- Fixed CSS for box-sizing when there's padding.
+
 FlipbookifyImageJS or Flipbookify is an **image-based** flipbook that lets user to turn their comic pages into an easy flipbook within seconds.<br>
 And lets user to add music into their comic book!
 
