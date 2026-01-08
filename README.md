@@ -38,7 +38,7 @@ Then add the JS structure like below:
         },                      // false by default - optional
         ui: false,
         hasZoom: false,         // default
-        keybind: false          // default
+        keybinds: false          // default
     });
 </script>
 ```
