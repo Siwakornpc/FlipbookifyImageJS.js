@@ -109,7 +109,7 @@ export function flipbookify(obj) {
     }
 
 
-    console.log("%cSiwakorn's JS Flipbook v1", "font-size: 20px;");
+    console.log("%cSiwakorn's JS Flipbook v1.1.0", "font-size: 20px;");
     let holder = "";
 
     if (obj.ui) {
@@ -167,7 +167,7 @@ export function flipbookify(obj) {
                 </div>
               </div>
               <div class="flex">
-                <div style="width: 220px; height:1px; position:absolute;" id="secbox"></div>
+                <div style="width: 240px; height:1px; position:absolute;" id="secbox"></div>
               </div>
             </div>`;
         }
@@ -183,12 +183,6 @@ export function flipbookify(obj) {
       <source src="https://raw.githubusercontent.com/Siwakornpc/music-tggd/main/Start.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>`;
-    }
-    if (obj.keybinds) {
-        holder += `
-    <div id="indi" class="">
-      <div class="ui-e-indi"><span>NULL</span></div>
-    </div>`;
     }
 
     document.getElementById('base').innerHTML = `
@@ -211,8 +205,12 @@ export function flipbookify(obj) {
       </div>
     </div>`;
 
-
-
+    if (obj.keybinds) {
+        document.getElementById('base').innerHTML += `
+        <div id="indi" class="">
+            <div class="ui-e-indi"><span>NULL</span></div>
+        </div>`; 
+    }
 
     const book = document.querySelector('.book');
     const eBook = document.querySelector('.e-book');
@@ -589,7 +587,7 @@ export function flipbookify(obj) {
 
     const pageSongs = obj.audios;
 
-    let currentSrcBase = pageSongs["p0"];
+    let currentSrcBase = pageSongs["0"];
 
     let userPaused = false;
 
@@ -690,10 +688,10 @@ export function flipbookify(obj) {
 
     function findNearestSongId(targetIndex, dir, songMap, totalPages) {
         if (dir === "backward") {
-        if (songMap[`p${targetIndex}`]) return `p${targetIndex}`;
+        if (songMap[targetIndex]) return targetIndex;
         } else {
         for (let i = targetIndex - 1; i >= 0; i--) {
-            if (songMap[`p${i}`]) return `p${i}`;
+            if (songMap[i]) return i;
         }
         }
         return null;
@@ -708,7 +706,7 @@ export function flipbookify(obj) {
             return;
         }
 
-        const currentPageId = `p${index}`;
+        const currentPageId = index;
         const dir = isFlippingForward ? "forward" : "backward";
 
         const nextPageId = findNearestSongId(index, dir, pageSongs, pages.length);
@@ -1068,99 +1066,101 @@ export function flipbookify(obj) {
             return; 
         }
 
-        if (event.code === 'KeyA' || event.key === 'ArrowLeft') {
-            if (currentPageIndex < 0) return;
-            pages[currentPageIndex].click();
-            updateEventIndiOnEvents(updatePageLabelFromEventIndiOnEvents(currentPageIndex));
-        }
-
-        if (event.code === 'KeyD' || event.key === 'ArrowRight') {
-            if (currentPageIndex >= pages.length - 1) return;
-            currentPageIndex++;
-            pages[currentPageIndex].click();
-            updateEventIndiOnEvents(updatePageLabelFromEventIndiOnEvents(currentPageIndex));
-        }
-
-        if (event.code === 'KeyP') {
-            let isPlaying = false;
-            
-            players.forEach(p => {
-            if (!p.paused) isPlaying = true;
-            });
-
-            if (isPlaying) {
-            players.forEach(p => p.pause());
-            playBtn.classList.add('play');
-            playBtn.classList.remove('pause');
-            window.userPaused = true;
-            } else {
-            players.forEach(p => p.play());
-            playBtn.classList.add('pause');
-            playBtn.classList.remove('play');
-            window.userPaused = false;
+        if (obj.keybinds) {
+            if (event.code === 'KeyA' || event.key === 'ArrowLeft') {
+                if (currentPageIndex < 0) return;
+                pages[currentPageIndex].click();
+                updateEventIndiOnEvents(updatePageLabelFromEventIndiOnEvents(currentPageIndex));
             }
-        }
-            
-        if (event.code === 'KeyM') {
-            if (!isMuted) {
-                lastVolume = getAverageVolume();
-                players.forEach(p => p.volume = 0);
-                updateUIFromVolume(0);
-                isMuted = true;
-                updateEventIndiOnEvents("Muted");
-            } else {
-                players.forEach(p => p.volume = lastVolume);
-                updateUIFromVolume(lastVolume);
-                isMuted = false;
-                updateEventIndiOnEvents("Unmuted");
-            }
-            saveVolume();
-        }
 
-        if (event.code === 'KeyZ') {
-            if (!zoomBtn.classList.contains("pressed")) {
-                zoomBtn.classList.add("pressed");
-                eBook.classList.add("zoomed");
-                zoomCtrl.classList.remove('not-used');
-                currentScale = 1.5;
-                updateMO();
-                updateZPonZ();
-                updateMousePositionForKeyBindingOfZoom();
-                isZoomed = true;
-            } else {
-                zoomBtn.classList.remove("pressed");
-                eBook.classList.remove("zoomed");
-                zoomCtrl.classList.add('not-used');
-                currentScale = 1;
-                updateZPonZ();
-                updateEventIndiOnEvents("Disabled Zoom");
-                isZoomed = false;
+            if (event.code === 'KeyD' || event.key === 'ArrowRight') {
+                if (currentPageIndex >= pages.length - 1) return;
+                currentPageIndex++;
+                pages[currentPageIndex].click();
+                updateEventIndiOnEvents(updatePageLabelFromEventIndiOnEvents(currentPageIndex));
             }
-        }
 
-        if (event.code === 'Equal') {
-            if (isZoomed && currentScale < 5) {
-                currentScale += 0.5;
-                updateMO();
-                updateZPonZ();
-                eBook.classList.add("zoomed");
-                const cx = window.innerWidth / 2;
-                const cy = window.innerHeight / 2;
-                targetX = (mouseX - cx) * currentMoveOffset;
-                targetY = (mouseY - cy) * currentMoveOffset;
+            if (event.code === 'KeyP') {
+                let isPlaying = false;
+                
+                players.forEach(p => {
+                if (!p.paused) isPlaying = true;
+                });
+
+                if (isPlaying) {
+                players.forEach(p => p.pause());
+                playBtn.classList.add('play');
+                playBtn.classList.remove('pause');
+                window.userPaused = true;
+                } else {
+                players.forEach(p => p.play());
+                playBtn.classList.add('pause');
+                playBtn.classList.remove('play');
+                window.userPaused = false;
+                }
             }
-        }
+                
+            if (event.code === 'KeyM') {
+                if (!isMuted) {
+                    lastVolume = getAverageVolume();
+                    players.forEach(p => p.volume = 0);
+                    updateUIFromVolume(0);
+                    isMuted = true;
+                    updateEventIndiOnEvents("Muted");
+                } else {
+                    players.forEach(p => p.volume = lastVolume);
+                    updateUIFromVolume(lastVolume);
+                    isMuted = false;
+                    updateEventIndiOnEvents("Unmuted");
+                }
+                saveVolume();
+            }
 
-        if (event.code === 'Minus') {
-            if (isZoomed && currentScale > 1) {
-                currentScale -= 0.5;
-                updateMO();
-                updateZPonZ();
-                eBook.classList.add("zoomed");
-                const cx = window.innerWidth / 2;
-                const cy = window.innerHeight / 2;
-                targetX = (mouseX - cx) * currentMoveOffset;
-                targetY = (mouseY - cy) * currentMoveOffset;
+            if (event.code === 'KeyZ') {
+                if (!zoomBtn.classList.contains("pressed")) {
+                    zoomBtn.classList.add("pressed");
+                    eBook.classList.add("zoomed");
+                    zoomCtrl.classList.remove('not-used');
+                    currentScale = 1.5;
+                    updateMO();
+                    updateZPonZ();
+                    updateMousePositionForKeyBindingOfZoom();
+                    isZoomed = true;
+                } else {
+                    zoomBtn.classList.remove("pressed");
+                    eBook.classList.remove("zoomed");
+                    zoomCtrl.classList.add('not-used');
+                    currentScale = 1;
+                    updateZPonZ();
+                    updateEventIndiOnEvents("Disabled Zoom");
+                    isZoomed = false;
+                }
+            }
+
+            if (event.code === 'Equal') {
+                if (isZoomed && currentScale < 5) {
+                    currentScale += 0.5;
+                    updateMO();
+                    updateZPonZ();
+                    eBook.classList.add("zoomed");
+                    const cx = window.innerWidth / 2;
+                    const cy = window.innerHeight / 2;
+                    targetX = (mouseX - cx) * currentMoveOffset;
+                    targetY = (mouseY - cy) * currentMoveOffset;
+                }
+            }
+
+            if (event.code === 'Minus') {
+                if (isZoomed && currentScale > 1) {
+                    currentScale -= 0.5;
+                    updateMO();
+                    updateZPonZ();
+                    eBook.classList.add("zoomed");
+                    const cx = window.innerWidth / 2;
+                    const cy = window.innerHeight / 2;
+                    targetX = (mouseX - cx) * currentMoveOffset;
+                    targetY = (mouseY - cy) * currentMoveOffset;
+                }
             }
         }
     }
@@ -1275,21 +1275,26 @@ export function flipbookify(obj) {
     }
     
     setTimeout(function() {
-    if (isHelpBoxTouchingRight()) {
-        plsHelpBoxAlign.style.justifyContent = "right";  
-    } else {
-        plsHelpBoxAlign.style.justifyContent = ""; 
-    }
+        if (isHelpBoxTouchingRight()) {
+            plsHelpBoxAlign.style.justifyContent = "right";  
+        } else {
+            plsHelpBoxAlign.style.justifyContent = ""; 
+        }
     }, 1000);
 
     window.addEventListener('resize', ()=> {
-    if (isHelpBoxTouchingRight()) {
-        plsHelpBoxAlign.style.justifyContent = "right";  
-    } else {
-        plsHelpBoxAlign.style.justifyContent = ""; 
-    }
+        if (isHelpBoxTouchingRight()) {
+            plsHelpBoxAlign.style.justifyContent = "right";  
+        } else {
+            plsHelpBoxAlign.style.justifyContent = ""; 
+        }
     });
-
+    
+    setInterval(function() {
+        if (isHelpBoxTouchingRight()) {
+            plsHelpBoxAlign.style.justifyContent = "right";  
+        } else {
+            plsHelpBoxAlign.style.justifyContent = ""; 
+        }
+    }, 100);
 }
-
-
