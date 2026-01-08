@@ -1,4 +1,4 @@
-# FlipbookifyImageJS.js v1.1.0
+# FlipbookifyImageJS.js 1.1.0
 
 ### Logs
 - Made the code for adding `audio` object names.
