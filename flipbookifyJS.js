@@ -109,7 +109,7 @@ export function flipbookify(obj) {
     }
 
 
-    console.log("%cSiwakorn's JS Flipbook v1.1.0", "font-size: 20px;");
+    console.log("%cFlipbookifyImageJS 1.1.0", "font-size: 20px;");
     let holder = "";
 
     if (obj.ui) {
@@ -1297,4 +1297,5 @@ export function flipbookify(obj) {
             plsHelpBoxAlign.style.justifyContent = ""; 
         }
     }, 100);
+
 }
