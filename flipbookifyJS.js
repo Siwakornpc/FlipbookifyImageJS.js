@@ -109,7 +109,7 @@ export function flipbookify(obj) {
     }
 
 
-    console.log("%cFlipbookifyImageJS 1.1.0", "font-size: 20px;");
+    console.log("%cSiwakorn's JS Flipbook v1.1.0", "font-size: 20px;");
     let holder = "";
 
     if (obj.ui) {
@@ -179,8 +179,8 @@ export function flipbookify(obj) {
     if (obj.audios) {
         holder += `
     <audio loop autoplay class="player">
-      <source src="https://raw.githubusercontent.com/Siwakornpc/music-tggd/main/Start.ogg" type="audio/ogg">
-      <source src="https://raw.githubusercontent.com/Siwakornpc/music-tggd/main/Start.mp3" type="audio/mpeg">
+      <source src="" type="audio/ogg">
+      <source src="" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>`;
     }
@@ -587,7 +587,7 @@ export function flipbookify(obj) {
 
     const pageSongs = obj.audios;
 
-    let currentSrcBase = pageSongs["0"];
+    let currentSrcBase = pageSongs[0];
 
     let userPaused = false;
 
@@ -619,6 +619,8 @@ export function flipbookify(obj) {
         mainPlayer.pause();
         }
     }
+
+    setSourcePaths(currentSrcBase);
     
     let fadeActive = false;
     let fadeTimer = null;
@@ -1297,5 +1299,4 @@ export function flipbookify(obj) {
             plsHelpBoxAlign.style.justifyContent = ""; 
         }
     }, 100);
-
 }
